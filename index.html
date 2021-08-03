@@ -277,7 +277,8 @@
           { "name": "Stock", "title": "Stock",    "targets": 4 },
           { "name": "Producto", "title": "Producto",   "targets": 5 },
           { "name": "CodigoOem", "title": "CodigoOem",  "targets": 6 },
-          { "name": "CodigoBarras", "title": "CodigoBarras", "targets": 7 }
+          { "name": "CodigoBarras", "title": "CodigoBarras", "targets": 7 },
+          { responsivePriority: 4, "name": "Acción", "title":"Acción", "targets":8}
         ],
         columns: [
 			    {"data" : "Codigo", "defaultContent": "<i>Not set</i>"},
@@ -287,12 +288,17 @@
           {"data" : "Stock", "defaultContent": "<i>Not set</i>"},
 			    {"data" : "Producto", "defaultContent": "<i>Not set</i>"},
           {"data" : "CodigoOem", "defaultContent": "<i>Not set</i>"},
-          {"data" : "CodigoBarras", "defaultContent": "<i>Not set</i>"}
+          {"data" : "CodigoBarras", "defaultContent": "<i>Not set</i>"},
+          {"defaultContent": "<button type='button' class='btn btn-primary' onclick='Imprimir()'>Imprimir</button>"}
 		    ],
         responsive: true
         
 			});
 		};
+
+    function Imprimir(){
+      alert("IMPRIMIR: falta desarrollar en JS la impresión de lacmpo 'CodigoBarras'")
+    }
 /*
     function Token1(){
       var client_id = "";
