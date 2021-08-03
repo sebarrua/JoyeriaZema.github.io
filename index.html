@@ -62,7 +62,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto" name="hero" href="#hero">Inicio</a></li>
           <li><a class="nav-link scrollto" name="products" href="#products">Productos</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -100,7 +100,7 @@
     </div>
 
   </section><!-- End Hero -->
-  <section id="products" class="hero d-flex">
+  <section id="products" class="products d-flex align-items-center">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -291,8 +291,10 @@
           {"data" : "CodigoBarras", "defaultContent": "<i>Not set</i>"},
           {"data" : "null", "defaultContent": "<button type='button' class='btn btn-primary' onclick='Imprimir()'>Imprimir</button>"}
 		    ],
-        responsive: true
-        
+        responsive : true,
+        scrollY : '50vh',
+        scrollCollapse : true,
+        paging : false
 			});
 		};
 
@@ -350,11 +352,12 @@
           $("#token").css("color", "#52be80");
 					document.getElementById("token").value = responseToken.access_token;
           Update();
-          const demoClasses = document.querySelectorAll('.nav-link');
-          demoClasses.forEach(element => {
-            element.setAttribute('class', '.nav-link');
-            element.classList.add('scrollto');
-          });
+          $("#hero").last().removeClass( "active" );
+          $("#pro").last().addClass( "active" )
+          //const hero = document.getElementsByName('hero');
+          //hero.removeClass('active');
+          //const pro = document.getElementsByName('products');
+          //pro.addClass('active');
 				},
 				error:function(responseToken){
           $("#token").css("color", "#ef3d3d");
@@ -410,12 +413,17 @@
         });
       }
     }
+    function showWindow(url) {
+      window.open(url, "_self", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes");
+    }
 
     function Update(){
       if(token.value==='' || token.value==='Error: por favor ingrese usuario y contraseña de Contabilium.'){
         $("#token").css("color", "#ef3d3d");
-					document.getElementById("token").value = 'Error: por favor ingrese usuario y contraseña de Contabilium.';
+				document.getElementById("token").value = 'Error: por favor ingrese usuario y contraseña de Contabilium.';
+        showWindow("#hero");
       }else{
+        showWindow("#products")
         $("#tbl_entidad").dataTable().fnDestroy();
         Productos();
       }
