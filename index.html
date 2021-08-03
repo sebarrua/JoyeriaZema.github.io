@@ -289,7 +289,7 @@
 			    {"data" : "Producto", "defaultContent": "<i>Not set</i>"},
           {"data" : "CodigoOem", "defaultContent": "<i>Not set</i>"},
           {"data" : "CodigoBarras", "defaultContent": "<i>Not set</i>"},
-          {"defaultContent": "<button type='button' class='btn btn-primary' onclick='Imprimir()'>Imprimir</button>"}
+          {"data" : "null", "defaultContent": "<button type='button' class='btn btn-primary' onclick='Imprimir()'>Imprimir</button>"}
 		    ],
         responsive: true
         
@@ -346,8 +346,6 @@
 					"client_secret": client_secret
 				},
 				success:function(responseToken) {
-					//document.getElementById("total_items").value=response;
-					//alert(response.data);
 					token=responseToken.access_token;
           $("#token").css("color", "#52be80");
 					document.getElementById("token").value = responseToken.access_token;
@@ -356,12 +354,7 @@
           demoClasses.forEach(element => {
             element.setAttribute('class', '.nav-link');
             element.classList.add('scrollto');
-            //$(".nav-link li.active").removeClass("active");
-            //element.getElementsByName('products').classList.add('active');
           });
-          const pro = document.getElementsByName('products');
-          pro.classList.add('active');
-					//return response.access_token;
 				},
 				error:function(responseToken){
           $("#token").css("color", "#ef3d3d");
