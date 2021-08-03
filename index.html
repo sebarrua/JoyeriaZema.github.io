@@ -365,52 +365,57 @@
 		};
 
     function AddProducto(){
-      var nombrePro = document.getElementById("Nombre").value;
-      var tipoPro = document.getElementById("Tipo").value;
-      var codigoPro = document.getElementById("Codigo").value;
-      var precioPro = document.getElementById("Precio").value;
-      var ivaPro = document.getElementById("Iva").value;
-      var estadoPro = document.getElementById("Estado").value;
-      var idRubroPro = document.getElementById("IDRubro").value;
-      var codigoBarrasPro = document.getElementById("CodigoBarras").value;
-      $.ajax({
-				url:"https://rest.contabilium.com/api/conceptos/",
-				type:"POST",
-				headers: {
-          'Authorization': 'Bearer '+token,
-          'Content-Type':'application/json',
-        },
-        
-        data: JSON.stringify({
-          "nombre": nombrePro,
-          "Tipo": "P",
-          "Codigo": codigoPro,
-          "CodigoOem": "",
-          "CodigoBarras": codigoBarrasPro,
-          "Descripcion": "Descripcion concepto api POST",
-          "Precio": precioPro,
-          "Iva": 21,
-          "Rentabilidad": 0,
-          "Stock": 0,
-          "StockMinimo":1,
-          "Observaciones": "Observaciones concepto api",
-          "Estado": "A",
-          "IdRubro": "92327"
-        }),
-        success(data, text) {
-          console.log(data);
-          Update();
-        },
-        error(request, status, error) {
-          console.log(error)
-        }
-			});
+      if(token.value==='' || token.value==='Error: por favor ingrese usuario y contraseña de Contabilium.'){
+        $("#token").css("color", "#ef3d3d");
+				document.getElementById("token").value = 'Error: por favor ingrese usuario y contraseña de Contabilium.';
+      }else{
+        var nombrePro = document.getElementById("Nombre").value;
+        var tipoPro = document.getElementById("Tipo").value;
+        var codigoPro = document.getElementById("Codigo").value;
+        var precioPro = document.getElementById("Precio").value;
+        var ivaPro = document.getElementById("Iva").value;
+        var estadoPro = document.getElementById("Estado").value;
+        var idRubroPro = document.getElementById("IDRubro").value;
+        var codigoBarrasPro = document.getElementById("CodigoBarras").value;
+        $.ajax({
+          url:"https://rest.contabilium.com/api/conceptos/",
+          type:"POST",
+          headers: {
+            'Authorization': 'Bearer '+token,
+            'Content-Type':'application/json',
+          },
+          
+          data: JSON.stringify({
+            "nombre": nombrePro,
+            "Tipo": "P",
+            "Codigo": codigoPro,
+            "CodigoOem": "",
+            "CodigoBarras": codigoBarrasPro,
+            "Descripcion": "Descripcion concepto api POST",
+            "Precio": precioPro,
+            "Iva": 21,
+            "Rentabilidad": 0,
+            "Stock": 0,
+            "StockMinimo":1,
+            "Observaciones": "Observaciones concepto api",
+            "Estado": "A",
+            "IdRubro": "92327"
+          }),
+          success(data, text) {
+            console.log(data);
+            Update();
+          },
+          error(request, status, error) {
+            console.log(error)
+          }
+        });
+      }
     }
 
     function Update(){
-      if(token.value==''){
+      if(token.value==='' || token.value==='Error: por favor ingrese usuario y contraseña de Contabilium.'){
         $("#token").css("color", "#ef3d3d");
-					document.getElementById("token").value = "Error: por favor ingrese usuario y contraseña de Contabilium.";
+					document.getElementById("token").value = 'Error: por favor ingrese usuario y contraseña de Contabilium.';
       }else{
         $("#tbl_entidad").dataTable().fnDestroy();
         Productos();
