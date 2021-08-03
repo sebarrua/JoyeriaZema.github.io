@@ -261,6 +261,7 @@
     })
     */
 		$(document).ready(function(){
+      var token='';
       var jsonObject = [];
       cargarTablaProductos(jsonObject);
 		});
@@ -407,8 +408,13 @@
     }
 
     function Update(){
-      $("#tbl_entidad").dataTable().fnDestroy();
-      Productos();
+      if(token.value==''){
+        $("#token").css("color", "#ef3d3d");
+					document.getElementById("token").value = "Error: por favor ingrese usuario y contraseña de Contabilium.";
+      }else{
+        $("#tbl_entidad").dataTable().fnDestroy();
+        Productos();
+      }
     };
 
 		function Productos(){
